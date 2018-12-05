@@ -7,10 +7,7 @@
 
 (defn parser [v]
   (let [[_ id from-left from-bottom width height] (re-find #"#(\d+)\s@\s(\d+),(\d+):\s(\d+)x(\d+)" v)
-        [from-left from-bottom width height] [(Long/parseLong from-left)
-                                              (Long/parseLong from-bottom)
-                                              (Long/parseLong width)
-                                              (Long/parseLong height)]]
+        [from-left from-bottom width height] (map #(Long/parseLong %) [from-left from-bottom width height])]
     (for [x (range from-left (+ width from-left))
           y (range from-bottom (+ height from-bottom))]
       {:id          id
